@@ -85,6 +85,24 @@ const page = () => {
 
 			});
 
+			spotify.getMyRecentlyPlayedTracks({ limit: 50 }).then((tracks) => {
+				
+				const totalMilliseconds = tracks.items.reduce((acc, track) => {
+					return acc + track.track.duration_ms;
+				}, 0);
+			
+				
+				const totalMinutes = Math.floor(totalMilliseconds / 60000);
+				
+				console.log("Total de minutos reproducidos recientemente:", totalMinutes);
+
+			}).catch((error) => {
+
+				console.log("Recently Played Tracks Error:", error);
+
+			});
+			
+			
 			setLoading(false);
 
 		} else {
